@@ -1,2 +1,2 @@
-chemestry-calculator
+chemistry-calculator
 ====================
