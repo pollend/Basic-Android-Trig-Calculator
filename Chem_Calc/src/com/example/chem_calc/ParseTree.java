@@ -51,7 +51,7 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 	public String visitMulDiv(@NotNull CalculatorParser.MulDivContext ctx)
 	{ 
 		double left = Double.parseDouble(visit(ctx.expr(0)));
-		double right = Double.parseDouble(visit(ctx.expr(0)));
+		double right = Double.parseDouble(visit(ctx.expr(1)));
 		if(ctx.op.getType() == CalculatorParser.MUL)
 		{
 			return Double.toString(left * right);
