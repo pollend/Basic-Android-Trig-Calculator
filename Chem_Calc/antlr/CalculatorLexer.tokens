@@ -1,0 +1,15 @@
+DOUBLE=9
+POWER=7
+RPAR=6
+NEWLINE=8
+LPAR=5
+MIN=4
+DIV=3
+MUL=1
+ADD=2
+'/'=3
+'('=5
+'-'=4
+'+'=2
+')'=6
+'^'=7
