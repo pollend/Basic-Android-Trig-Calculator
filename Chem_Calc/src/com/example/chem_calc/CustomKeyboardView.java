@@ -1,6 +1,7 @@
 package com.example.chem_calc;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.inputmethodservice.KeyboardView;
 import android.util.AttributeSet;
@@ -9,6 +10,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Animation.AnimationListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.ScrollView;
 
 public class CustomKeyboardView extends KeyboardView {
 
@@ -16,7 +21,7 @@ public class CustomKeyboardView extends KeyboardView {
 		super(context, attrs);
 	}
 
-	public void ShowkeyBoard(View v)
+	public void ShowkeyBoard(View v,Activity activity)
 	{
 		if (this.getVisibility() == this.GONE) {
 			this.setVisibility(this.VISIBLE);
@@ -27,10 +32,12 @@ public class CustomKeyboardView extends KeyboardView {
 		if(v!= null)((InputMethodManager)this.getContext().getSystemService(this.getContext().INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
 		
 	}
-	public void Hidekeyboard(View v)
+	public void Hidekeyboard(View v,Activity activity)
 	{
 		if (this.getVisibility() != this.GONE) {
 			this.setVisibility(this.GONE);
+			ScrollView mScroll = (ScrollView) activity.findViewById(R.id.FieldView);
+			mScroll.setPadding(0, 0, 0,0);
 		}
 	}
 	

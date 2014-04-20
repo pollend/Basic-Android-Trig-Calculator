@@ -71,11 +71,10 @@ public class BackListView {
 			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)lfield.getLayoutParams();
 			lprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			lprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			lprams.setMargins(10, 10, 10, 10);
 			lfield.setBackgroundColor(Color.WHITE);
 			lfield.setTextColor(Color.GRAY);
 			lfield.setTextIsSelectable(true);
-			lfield.setPadding(10, 10, 10, 10);
-
 			lfield.setInputType(InputType.TYPE_NULL);
 			
 			lfield.setOnTouchListener(new View.OnTouchListener() {
@@ -96,9 +95,9 @@ public class BackListView {
 				public void onFocusChange(View v, boolean hasFocus) {
 					
 					if(hasFocus)
-						_customKeyboard.ShowkeyBoard( v);
+						_customKeyboard.ShowkeyBoard( v,_activity);
 					else
-						_customKeyboard.Hidekeyboard( v);
+						_customKeyboard.Hidekeyboard( v,_activity);
 					
 				}
 			});
@@ -124,17 +123,21 @@ public class BackListView {
 	private void ChangeToDisplay(RelativeLayout layout)
 	{
 		layout.removeAllViews();
+		final TextView lequation = new TextView(_activity.getApplicationContext());
 		final TextView loutput = new TextView(_activity.getApplicationContext());
+		
+		final View lseperator = new View(_activity.getApplicationContext());
 		loutput.setTextIsSelectable(true);
 		layout.addView(loutput);
-		
+		layout.addView(lseperator);
+		layout.addView(lequation);
 		{
 			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)loutput.getLayoutParams();
-			lprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			lprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			lprams.setMargins(19, 10, 10, 19);
 			loutput.setTextColor(Color.BLACK);
 			loutput.setTextSize(20);
-			loutput.setPadding(10, 10, 10, 10);
+			loutput.setPadding(0, 0, 17,0);
 			
 			ANTLRInputStream linput = new ANTLRInputStream(_textView.getText().toString());
 			CalculatorLexer llexer = new CalculatorLexer(linput);
@@ -142,9 +145,29 @@ public class BackListView {
 			ProgContext ltree = lparser.prog();
 			ParseTree lparseTree = new ParseTree();
 			
-			loutput.setText(_textView.getText() + "="+lparseTree.visit(ltree));
-			
-			
+			loutput.setText(lparseTree.visit(ltree));
+
+		}
+		
+		{
+			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)lequation.getLayoutParams();
+			lprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			lprams.setMargins(19, 10, 10, 19);
+			lequation.setTextColor(Color.BLACK);
+			lequation.setTextSize(20);
+			lequation.setPadding(14, 0, 0, 0);
+			lequation.setText(_textView.getText());
+		}
+		
+		{
+			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)lseperator.getLayoutParams();
+			lprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			lprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			lprams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+			lseperator.setBackgroundColor(Color.BLACK);
+			lprams.setMargins(15, 10, 15, 10);
+			lprams.height = 1;
+		
 		}
 		
 		

@@ -69,7 +69,6 @@ public class KeyboardActionListner implements OnKeyboardActionListener {
 		int lstart = leditText.getSelectionStart();
 		if(primaryCode == -1)
 		{
-
 			leditText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_ENTER));
 		}
 		else if(primaryCode == -5)
