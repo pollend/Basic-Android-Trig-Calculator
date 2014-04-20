@@ -55,7 +55,7 @@ public class BackListView {
 		
 		final RelativeLayout lrelativeView = new RelativeLayout(_activity.getApplicationContext());
 		final EditText lfield = new EditText(_activity.getApplicationContext());
-		lfield.setLines(1);
+		final View lseperator = new View(_activity.getApplicationContext());
 		
 		_textView = lfield;
 		
@@ -65,15 +65,28 @@ public class BackListView {
 		//add the components
 		_scrollingView.addView(lrelativeView);
 		lrelativeView.addView(lfield);
+		lrelativeView.addView(lseperator);
+		/*SEPERATOR*/
+		{
+			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)lseperator.getLayoutParams();
+			lprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			lprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			lprams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+			lseperator.setBackgroundColor(Color.BLUE);
+			lprams.setMargins(10, 10, 10, 10);
+			lprams.height = 1;
 		
+		}
+		
+		/*FIELD*/
 		{
 			
 			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)lfield.getLayoutParams();
 			lprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			lprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			lprams.setMargins(10, 10, 10, 10);
-			lfield.setBackgroundColor(Color.WHITE);
-			lfield.setTextColor(Color.GRAY);
+			lfield.setBackgroundColor(Color.TRANSPARENT);
+			lfield.setTextColor(Color.BLACK);
 			lfield.setTextIsSelectable(true);
 			lfield.setInputType(InputType.TYPE_NULL);
 			
@@ -95,7 +108,9 @@ public class BackListView {
 				public void onFocusChange(View v, boolean hasFocus) {
 					
 					if(hasFocus)
+					{
 						_customKeyboard.ShowkeyBoard( v,_activity);
+					}
 					else
 						_customKeyboard.Hidekeyboard( v,_activity);
 					
@@ -125,12 +140,14 @@ public class BackListView {
 		layout.removeAllViews();
 		final TextView lequation = new TextView(_activity.getApplicationContext());
 		final TextView loutput = new TextView(_activity.getApplicationContext());
-		
 		final View lseperator = new View(_activity.getApplicationContext());
+		
 		loutput.setTextIsSelectable(true);
 		layout.addView(loutput);
 		layout.addView(lseperator);
 		layout.addView(lequation);
+		
+		/*OUTPUT ANSWER*/
 		{
 			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)loutput.getLayoutParams();
 			lprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -149,6 +166,7 @@ public class BackListView {
 
 		}
 		
+		/*EQUATION*/
 		{
 			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)lequation.getLayoutParams();
 			lprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -158,7 +176,7 @@ public class BackListView {
 			lequation.setPadding(14, 0, 0, 0);
 			lequation.setText(_textView.getText());
 		}
-		
+		/*SEPERATOR*/
 		{
 			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)lseperator.getLayoutParams();
 			lprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
