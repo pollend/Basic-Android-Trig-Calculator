@@ -94,6 +94,7 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 	@Override 
 	public String visitFunction(@NotNull CalculatorParser.FunctionContext ctx) 
 	{ 
+		
 		String[] lvalue = new String[ctx.expr().size()];
 		for(int x = 0;x < ctx.expr().size(); x++)
 		{
@@ -103,7 +104,7 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 		double lfinal = 1;
 		for(int x = 0;x < ctx.DOUBLE().size();x++)
 		{
-			lfinal  *= Double.parseDouble(visit(ctx.DOUBLE(x)));
+			lfinal  *= Double.parseDouble(ctx.DOUBLE(x).getText());
 		}
 		
 		return Double.toString(Double.parseDouble(_functions.get(ctx.func.getText()).ProcessFunction(lvalue)) * lfinal);
