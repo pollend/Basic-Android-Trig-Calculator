@@ -33,6 +33,13 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	T visitPower(@NotNull CalculatorParser.PowerContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link CalculatorParser#mixedfunctionParen}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link CalculatorParser#AddSub}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -42,6 +42,17 @@ public interface CalculatorListener extends ParseTreeListener {
 	void exitPower(@NotNull CalculatorParser.PowerContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#mixedfunctionParen}.
+	 * @param ctx the parse tree
+	 */
+	void enterMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#mixedfunctionParen}.
+	 * @param ctx the parse tree
+	 */
+	void exitMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link CalculatorParser#AddSub}.
 	 * @param ctx the parse tree
 	 */

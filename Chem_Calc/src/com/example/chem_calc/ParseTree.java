@@ -49,23 +49,6 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 		
 		return ctx.DOUBLE().getText();
 	}
-	/*@Override 
-	public String visitMul(@NotNull CalculatorParser.MulContext ctx) 
-	{ 
-		double left = Double.parseDouble(visit(ctx.expr()));
-		double right = Double.parseDouble(visit(ctx.function()));
-		return Double.toString((left * right));
-	}
-
-	@Override 
-	public String visitTriMulFun(@NotNull CalculatorParser.TriMulFunContext ctx) 
-	{ 
-		double left = Double.parseDouble(visit(ctx.expr(0)));
-		double middle = Double.parseDouble(visit(ctx.function()));
-		double right = Double.parseDouble(visit(ctx.expr(1)));
-		return Double.toString((left * middle* right));
-	}*/
-
 	
 	@Override 
 	public String visitPower(@NotNull CalculatorParser.PowerContext ctx) 
@@ -116,7 +99,14 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 		{
 			lvalue[x] = visit(ctx.expr(x));
 		}
-		return _functions.get(ctx.func.getText()).ProcessFunction(lvalue);
+		
+		double lfinal = 1;
+		for(int x = 0;x < ctx.DOUBLE().size();x++)
+		{
+			lfinal  *= Double.parseDouble(visit(ctx.DOUBLE(x)));
+		}
+		
+		return Double.toString(Double.parseDouble(_functions.get(ctx.func.getText()).ProcessFunction(lvalue)) * lfinal);
 		
 	}
 	
@@ -137,10 +127,25 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 	@Override 
 	public String visitParen(@NotNull CalculatorParser.ParenContext ctx) 
 	{ 
-		return visit(ctx.expr());
+		double lfinal = 1;
+		for(int x = 0;x < ctx.DOUBLE().size();x++)
+		{
+			lfinal  *= Double.parseDouble(visit(ctx.DOUBLE(x)));
+		}
+	
+		return Double.toString(Double.parseDouble(visit(ctx.expr()))*lfinal);
+	}
+	
+	@Override 
+	public String visitMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx)
+	{ 
+
+			double lfunction  = Double.parseDouble(visit(ctx.function()));
+			double lparen = Double.parseDouble(visit(ctx.paren()));
+			return Double.toString(lfunction * lparen);
+		
 		
 	}
-
 
 
 }

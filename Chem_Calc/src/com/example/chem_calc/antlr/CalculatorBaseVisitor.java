@@ -42,6 +42,14 @@ public class CalculatorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitAddSub(@NotNull CalculatorParser.AddSubContext ctx) { return visitChildren(ctx); }
 
 	/**

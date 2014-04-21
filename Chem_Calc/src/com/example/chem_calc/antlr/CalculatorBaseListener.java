@@ -56,6 +56,19 @@ public class CalculatorBaseListener implements CalculatorListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterAddSub(@NotNull CalculatorParser.AddSubContext ctx) { }
 	/**
 	 * {@inheritDoc}
