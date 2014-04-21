@@ -1,4 +1,4 @@
-// Generated from C:\Users\Michael pollind\workspace\Chem_Calc\antlr\Calculator.g4 by ANTLR 4.1
+// Generated from C:\Users\Michael pollind\Desktop\chem_calc\antlr\Calculator.g4 by ANTLR 4.1
 package com.example.chem_calc.antlr;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -40,11 +40,32 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAddSub(@NotNull CalculatorParser.AddSubContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link CalculatorParser#paren}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParen(@NotNull CalculatorParser.ParenContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link CalculatorParser#parens}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitParens(@NotNull CalculatorParser.ParensContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CalculatorParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunc(@NotNull CalculatorParser.FuncContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CalculatorParser#function}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction(@NotNull CalculatorParser.FunctionContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link CalculatorParser#MulDiv}.

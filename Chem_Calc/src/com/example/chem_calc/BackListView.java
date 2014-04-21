@@ -31,7 +31,7 @@ public class BackListView {
 	private Activity _activity;
 	private EditText _textView;
 	private CustomKeyboardView _customKeyboard;
-
+	private ParseTree _parseTree = new ParseTree();
 	
 	public void OnCreate(Activity activity)
 	{
@@ -44,10 +44,7 @@ public class BackListView {
 		_customKeyboard.setKeyboard( new Keyboard(activity.getApplicationContext(), R.layout.basic_math_keyboard));
 		_customKeyboard.setOnKeyboardActionListener(new KeyboardActionListner(_activity));
 		
-
 		AddField();
-		
-	
 	}
 	
 	private void AddField()
@@ -103,17 +100,13 @@ public class BackListView {
 			});
 				
 			lfield.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-				
 				@Override
 				public void onFocusChange(View v, boolean hasFocus) {
 					
 					if(hasFocus)
-					{
 						_customKeyboard.ShowkeyBoard( v,_activity);
-					}
 					else
 						_customKeyboard.Hidekeyboard( v,_activity);
-					
 				}
 			});
 			lfield.setOnKeyListener(new View.OnKeyListener() {
@@ -160,9 +153,8 @@ public class BackListView {
 			CalculatorLexer llexer = new CalculatorLexer(linput);
 			CalculatorParser lparser = new CalculatorParser(new CommonTokenStream(llexer));
 			ProgContext ltree = lparser.prog();
-			ParseTree lparseTree = new ParseTree();
 			
-			loutput.setText(lparseTree.visit(ltree));
+			loutput.setText(_parseTree.visit(ltree));
 
 		}
 		

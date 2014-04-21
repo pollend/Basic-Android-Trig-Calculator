@@ -1,4 +1,4 @@
-// Generated from C:\Users\Michael pollind\workspace\Chem_Calc\antlr\Calculator.g4 by ANTLR 4.1
+// Generated from C:\Users\Michael pollind\Desktop\chem_calc\antlr\Calculator.g4 by ANTLR 4.1
 package com.example.chem_calc.antlr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -69,6 +69,19 @@ public class CalculatorBaseListener implements CalculatorListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterParen(@NotNull CalculatorParser.ParenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitParen(@NotNull CalculatorParser.ParenContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterParens(@NotNull CalculatorParser.ParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -76,6 +89,32 @@ public class CalculatorBaseListener implements CalculatorListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitParens(@NotNull CalculatorParser.ParensContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterFunc(@NotNull CalculatorParser.FuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitFunc(@NotNull CalculatorParser.FuncContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterFunction(@NotNull CalculatorParser.FunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitFunction(@NotNull CalculatorParser.FunctionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

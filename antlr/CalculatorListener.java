@@ -1,4 +1,4 @@
-// Generated from C:\Users\Michael pollind\workspace\Chem_Calc\antlr\Calculator.g4 by ANTLR 4.1
+// Generated from C:\Users\Michael pollind\Desktop\chem_calc\antlr\Calculator.g4 by ANTLR 4.1
 package com.example.chem_calc.antlr;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
@@ -53,6 +53,17 @@ public interface CalculatorListener extends ParseTreeListener {
 	void exitAddSub(@NotNull CalculatorParser.AddSubContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#paren}.
+	 * @param ctx the parse tree
+	 */
+	void enterParen(@NotNull CalculatorParser.ParenContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#paren}.
+	 * @param ctx the parse tree
+	 */
+	void exitParen(@NotNull CalculatorParser.ParenContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link CalculatorParser#parens}.
 	 * @param ctx the parse tree
 	 */
@@ -62,6 +73,28 @@ public interface CalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParens(@NotNull CalculatorParser.ParensContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#func}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunc(@NotNull CalculatorParser.FuncContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#func}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunc(@NotNull CalculatorParser.FuncContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction(@NotNull CalculatorParser.FunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction(@NotNull CalculatorParser.FunctionContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link CalculatorParser#MulDiv}.
