@@ -131,7 +131,7 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 		double lfinal = 1;
 		for(int x = 0;x < ctx.DOUBLE().size();x++)
 		{
-			lfinal  *= Double.parseDouble(visit(ctx.DOUBLE(x)));
+			lfinal  *= Double.parseDouble(ctx.DOUBLE(x).getText());
 		}
 	
 		return Double.toString(Double.parseDouble(visit(ctx.expr()))*lfinal);

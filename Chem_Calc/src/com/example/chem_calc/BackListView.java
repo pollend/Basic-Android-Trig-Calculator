@@ -135,7 +135,6 @@ public class BackListView {
 		final TextView loutput = new TextView(_activity.getApplicationContext());
 		final View lseperator = new View(_activity.getApplicationContext());
 		
-		loutput.setTextIsSelectable(true);
 		layout.addView(loutput);
 		layout.addView(lseperator);
 		layout.addView(lequation);
@@ -153,7 +152,7 @@ public class BackListView {
 			CalculatorLexer llexer = new CalculatorLexer(linput);
 			CalculatorParser lparser = new CalculatorParser(new CommonTokenStream(llexer));
 			ProgContext ltree = lparser.prog();
-			
+			loutput.setTextIsSelectable(true);
 			loutput.setText(_parseTree.visit(ltree));
 
 		}
@@ -166,6 +165,7 @@ public class BackListView {
 			lequation.setTextColor(Color.BLACK);
 			lequation.setTextSize(20);
 			lequation.setPadding(14, 0, 0, 0);
+			lequation.setTextIsSelectable(true);
 			lequation.setText(_textView.getText());
 		}
 		/*SEPERATOR*/
