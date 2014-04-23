@@ -15,6 +15,7 @@ import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -134,9 +135,11 @@ public class BackListView {
 		final TextView loutput = new TextView(_activity.getApplicationContext());
 		final View lseperator = new View(_activity.getApplicationContext());
 		
-		layout.addView(loutput);
+		layout.addView(loutput,new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		layout.addView(lseperator);
-		layout.addView(lequation);
+		layout.addView(lequation,new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		
+		lequation.setId(MainActivity.GenerateID());
 		
 		/*OUTPUT ANSWER*/
 		{
@@ -167,6 +170,18 @@ public class BackListView {
 			lequation.setTextIsSelectable(true);
 			lequation.setText(_textView.getText());
 		}
+		/*TEST FOR EXQUATION AND OUTPUT INTERSECTION*/
+		lequation.measure(MeasureSpec.UNSPECIFIED,MeasureSpec.UNSPECIFIED);
+		loutput.measure(MeasureSpec.UNSPECIFIED,MeasureSpec.UNSPECIFIED);
+		int x  =lequation.getMeasuredWidth();
+		int y  =loutput.getMeasuredWidth();
+		int z  =_scrollingView.getMeasuredWidth();
+		if(lequation.getMeasuredWidth() + loutput.getMeasuredWidth() > (_scrollingView.getMeasuredWidth()-50))
+		{
+			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)loutput.getLayoutParams();
+			lprams.addRule(RelativeLayout.BELOW,lequation.getId());
+		}
+		
 		/*SEPERATOR*/
 		{
 			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)lseperator.getLayoutParams();
@@ -176,7 +191,6 @@ public class BackListView {
 			lseperator.setBackgroundColor(Color.BLACK);
 			lprams.setMargins(15, 10, 15, 10);
 			lprams.height = 1;
-		
 		}
 
 	}
