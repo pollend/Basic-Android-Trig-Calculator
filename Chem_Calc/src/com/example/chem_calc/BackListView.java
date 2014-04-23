@@ -88,7 +88,6 @@ public class BackListView {
 			lfield.setInputType(InputType.TYPE_NULL);
 			
 			lfield.setOnTouchListener(new View.OnTouchListener() {
-				
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 				    EditText edittext = (EditText) v;
@@ -153,7 +152,7 @@ public class BackListView {
 			CalculatorParser lparser = new CalculatorParser(new CommonTokenStream(llexer));
 			ProgContext ltree = lparser.prog();
 			loutput.setTextIsSelectable(true);
-			loutput.setText(_parseTree.visit(ltree));
+			loutput.setText(_parseTree.visit(ltree).GetValueAsString());
 
 		}
 		
@@ -179,10 +178,7 @@ public class BackListView {
 			lprams.height = 1;
 		
 		}
-		
-		
-		
-	}
 
+	}
 	
 }

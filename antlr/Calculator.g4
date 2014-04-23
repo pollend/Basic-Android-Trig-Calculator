@@ -17,7 +17,7 @@ expr:   expr op=(MUL|DIV) expr # MulDiv
     |   paren function # mixedfunctionParen
     |   function paren # mixedfunctionParen
     |   function+ # func
-    |   paren+  # parens ;
+    |   paren+  # parens;
 
 paren: DOUBLE LPAR expr RPAR DOUBLE 
      | DOUBLE LPAR expr RPAR 
@@ -34,6 +34,6 @@ function: DOUBLE func=NAME LPAR ((expr',')+ expr) RPAR DOUBLE
         | func=NAME LPAR expr RPAR;
 
 WS : (' ' | '\t')+{skip();};
-DOUBLE  : ([0-9]+ '.' [0-9]+) | [0-9]+ ;
+DOUBLE  : ([0-9]+ '.' [0-9]+) | [0-9]+ | '.' [0-9]+;
 CHEMICAL : [A-Z | a-z]+ [0-9]+;
 NAME:[A-Za-z]+;

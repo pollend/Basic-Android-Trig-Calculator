@@ -1,5 +1,7 @@
 package com.example.chem_calc.Functions;
 
+import com.example.chem_calc.Value;
+
 public class Csc extends Function{
 
 	@Override
@@ -8,8 +10,8 @@ public class Csc extends Function{
 	}
 
 	@Override
-	public String ProcessFunction(String[] values) {
-		return Double.toString(1.0/Math.sin(Double.parseDouble(values[0])));
+	public Value ProcessFunction(Value[] values) {
+		return new Value(1.0/Math.sin(values[0].GetValueAsDouble()));
 	}
 
 }

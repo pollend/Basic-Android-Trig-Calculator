@@ -1,5 +1,6 @@
 package com.example.chem_calc;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +14,10 @@ import com.example.chem_calc.Functions.*;
 
 
 
-public class ParseTree extends CalculatorBaseVisitor<String>{
+public class ParseTree extends CalculatorBaseVisitor<Value>{
 
 	private Map<String, Function> _functions = new HashMap<String,Function>();
-	
+
 	public ParseTree()
 	{
 		List<Function> lfunctions = Function.GetAllFunctions();
@@ -26,17 +27,18 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 		}
 
 	}
+
 	@Override 
-	public String visitProg(@NotNull CalculatorParser.ProgContext ctx)
+	public Value visitProg(@NotNull CalculatorParser.ProgContext ctx)
 	{ 
 		if(ctx.expr().size() > 1)
 		{
 			double lfinal = 1;
 			for(int x = 0;x < ctx.expr().size();x++)
 			{
-				lfinal *= Double.parseDouble(visit(ctx.expr().get(x)));
+				lfinal *= visit(ctx.expr().get(x)).GetValueAsDouble();
 			}
-			return Double.toString(lfinal);
+			return new Value(lfinal);
 		}
 		else
 		return super.visitProg(ctx); 
@@ -44,58 +46,57 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 
 
 	@Override 
-	public String visitDOUBLE(@NotNull CalculatorParser.DOUBLEContext ctx) 
+	public Value visitDOUBLE(@NotNull CalculatorParser.DOUBLEContext ctx) 
 	{
-		
-		return ctx.DOUBLE().getText();
+		return new Value(Double.parseDouble(ctx.DOUBLE().getText()));
 	}
 	
 	@Override 
-	public String visitPower(@NotNull CalculatorParser.PowerContext ctx) 
+	public Value visitPower(@NotNull CalculatorParser.PowerContext ctx) 
 	{ 
-		double left = Double.parseDouble(visit(ctx.expr(0)));
-		double right = Double.parseDouble(visit(ctx.expr(1)));
-		return Double.toString(Math.pow(left, right));
+		double left = visit(ctx.expr(0)).GetValueAsDouble();
+		double right = visit(ctx.expr(1)).GetValueAsDouble();
+		return new Value(Math.pow(left, right));
 
 	}
 
 	
 	@Override
-	public String visitAddSub(@NotNull CalculatorParser.AddSubContext ctx) 
+	public Value visitAddSub(@NotNull CalculatorParser.AddSubContext ctx) 
 	{ 
-		double left = Double.parseDouble(visit(ctx.expr(0)));
-		double right = Double.parseDouble(visit(ctx.expr(1)));
+		double left = visit(ctx.expr(0)).GetValueAsDouble();
+		double right = visit(ctx.expr(1)).GetValueAsDouble();
 		if(ctx.op.getType() == CalculatorParser.ADD)
 		{
-			return Double.toString(left + right);
+			return new Value(left + right);
 		}
 		else
 		{
-			return Double.toString(left - right);
+			return new Value(left - right);
 		}
 	}
 
 
 	@Override
-	public String visitMulDiv(@NotNull CalculatorParser.MulDivContext ctx)
+	public Value visitMulDiv(@NotNull CalculatorParser.MulDivContext ctx)
 	{ 
-		double left = Double.parseDouble(visit(ctx.expr(0)));
-		double right = Double.parseDouble(visit(ctx.expr(1)));
+		double left = visit(ctx.expr(0)).GetValueAsDouble();
+		double right = visit(ctx.expr(1)).GetValueAsDouble();
 		if(ctx.op.getType() == CalculatorParser.MUL)
 		{
-			return Double.toString(left * right);
+			return new Value(left * right);
 		}
 		else
 		{
-			return Double.toString(left / right);
+			return new Value(left / right);
 		}
 	}
 	
 	@Override 
-	public String visitFunction(@NotNull CalculatorParser.FunctionContext ctx) 
+	public Value visitFunction(@NotNull CalculatorParser.FunctionContext ctx) 
 	{ 
 		
-		String[] lvalue = new String[ctx.expr().size()];
+		Value[] lvalue = new Value[ctx.expr().size()];
 		for(int x = 0;x < ctx.expr().size(); x++)
 		{
 			lvalue[x] = visit(ctx.expr(x));
@@ -107,45 +108,42 @@ public class ParseTree extends CalculatorBaseVisitor<String>{
 			lfinal  *= Double.parseDouble(ctx.DOUBLE(x).getText());
 		}
 		
-		return Double.toString(Double.parseDouble(_functions.get(ctx.func.getText()).ProcessFunction(lvalue)) * lfinal);
+		return new Value(_functions.get(ctx.func.getText()).ProcessFunction(lvalue).GetValueAsDouble() * lfinal);
 		
 	}
 	
-	@Override public String visitParens(@NotNull CalculatorParser.ParensContext ctx)
+	@Override 
+	public Value visitParens(@NotNull CalculatorParser.ParensContext ctx)
 	{
 		if(ctx.paren().size() > 1)
 		{
 			double lfinal = 1;
 			for(int x = 0;x < ctx.paren().size();x++)
 			{
-				lfinal *= Double.parseDouble(visit(ctx.paren(x)));
+				lfinal *= visit(ctx.paren(x)).GetValueAsDouble();
 			}
-			return Double.toString(lfinal);
+			return new Value(lfinal);
 		}
 		else
 		return super.visitParens(ctx);
 	}
 	@Override 
-	public String visitParen(@NotNull CalculatorParser.ParenContext ctx) 
+	public Value visitParen(@NotNull CalculatorParser.ParenContext ctx) 
 	{ 
 		double lfinal = 1;
 		for(int x = 0;x < ctx.DOUBLE().size();x++)
 		{
 			lfinal  *= Double.parseDouble(ctx.DOUBLE(x).getText());
 		}
-	
-		return Double.toString(Double.parseDouble(visit(ctx.expr()))*lfinal);
+		return new Value(visit(ctx.expr()).GetValueAsDouble()*lfinal);
 	}
 	
 	@Override 
-	public String visitMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx)
+	public Value visitMixedfunctionParen(@NotNull CalculatorParser.MixedfunctionParenContext ctx)
 	{ 
-
-			double lfunction  = Double.parseDouble(visit(ctx.function()));
-			double lparen = Double.parseDouble(visit(ctx.paren()));
-			return Double.toString(lfunction * lparen);
-		
-		
+		double lfunction  =visit(ctx.function()).GetValueAsDouble();
+		double lparen = visit(ctx.paren()).GetValueAsDouble();
+		return new Value(lfunction * lparen);
 	}
 
 

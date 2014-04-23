@@ -1,13 +1,19 @@
 package com.example.chem_calc.Functions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.example.chem_calc.Value;
 
 public abstract class Function {
-	public Function()
+
+	public static Function GetFunction(String func)
 	{
-		
+		return null;
 	}
+	
 	
 	public static List<Function> GetAllFunctions()
 	{
@@ -31,7 +37,7 @@ public abstract class Function {
 		return null;
 	
 	}
-	public String ProcessFunction(String[] values)
+	public Value ProcessFunction(Value[] values)
 	{
 		return null;
 		

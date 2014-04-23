@@ -1,5 +1,7 @@
 package com.example.chem_calc.Functions;
 
+import com.example.chem_calc.Value;
+
 public class Arcsin extends Function{
 
 	@Override
@@ -8,8 +10,8 @@ public class Arcsin extends Function{
 	}
 
 	@Override
-	public String ProcessFunction(String[] values) {
-		return Double.toString(Math.asin(Double.parseDouble(values[0])));
+	public Value ProcessFunction(Value[] values) {
+		return new Value(Math.asin(values[0].GetValueAsDouble()));
 	}
 
 }
