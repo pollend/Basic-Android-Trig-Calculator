@@ -27,18 +27,20 @@ public final class R {
         public static final int sym_keyboard_feedback_return=0x7f020003;
     }
     public static final class id {
-        public static final int FieldView=0x7f080000;
-        public static final int action_settings=0x7f080005;
-        public static final int button1=0x7f080003;
-        public static final int button2=0x7f080004;
-        public static final int keyboard_view=0x7f080001;
-        public static final int viewFlipper1=0x7f080002;
+        public static final int FieldView=0x7f080001;
+        public static final int MainFieldContainer=0x7f080000;
+        public static final int action_settings=0x7f080006;
+        public static final int button1=0x7f080004;
+        public static final int button2=0x7f080005;
+        public static final int keyboard_view=0x7f080002;
+        public static final int viewFlipper1=0x7f080003;
     }
     public static final class layout {
-        public static final int basic_math_keyboard=0x7f030000;
-        public static final int list_view=0x7f030001;
-        public static final int slide_in_bottom=0x7f030002;
-        public static final int test=0x7f030003;
+        public static final int basic_math_keyboard_landscape=0x7f030000;
+        public static final int basic_math_keyboard_portrait=0x7f030001;
+        public static final int list_view=0x7f030002;
+        public static final int slide_in_bottom=0x7f030003;
+        public static final int test=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;

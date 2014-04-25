@@ -36,4 +36,4 @@ function: DOUBLE func=NAME LPAR ((expr',')+ expr) RPAR DOUBLE
 WS : (' ' | '\t')+{skip();};
 DOUBLE  : ([0-9]+ '.' [0-9]+) | [0-9]+ | '.' [0-9]+;
 CHEMICAL : [A-Z | a-z]+ [0-9]+;
-NAME:[A-Za-z]+;
+NAME:[A-Z | a-z]+;

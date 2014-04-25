@@ -8,6 +8,7 @@ import com.example.chem_calc.antlr.CalculatorParser;
 import com.example.chem_calc.antlr.CalculatorParser.ProgContext;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
@@ -27,7 +28,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class BackListView {
+public class BackListView extends Fragment{
 	private LinearLayout _scrollingView;
 	private Activity _activity;
 	private EditText _textView;
@@ -40,13 +41,30 @@ public class BackListView {
 		activity.setContentView(R.layout.list_view);
 		_scrollingView = (LinearLayout)((ScrollView) activity.findViewById(R.id.FieldView)).getChildAt(0);
 		
-		//set the keyboard
-		_customKeyboard = (CustomKeyboardView) activity.findViewById(R.id.keyboard_view);
-		_customKeyboard.setKeyboard( new Keyboard(activity.getApplicationContext(), R.layout.basic_math_keyboard));
-		_customKeyboard.setOnKeyboardActionListener(new KeyboardActionListner(_activity));
-		
+		UpdateKeyboard(_activity.getResources().getConfiguration().orientation);
 		AddField();
+
 	}
+	
+	public void UpdateKeyboard(int orientation)
+	{
+		
+		//set the keyboard
+		_customKeyboard = (CustomKeyboardView) _activity.findViewById(R.id.keyboard_view);
+		if(orientation == _activity.getResources().getConfiguration().ORIENTATION_LANDSCAPE)
+		{
+			_customKeyboard.setKeyboard( new Keyboard(_activity.getApplicationContext(), R.layout.basic_math_keyboard_landscape));
+		}
+		else
+		{
+			_customKeyboard.setKeyboard( new Keyboard(_activity.getApplicationContext(), R.layout.basic_math_keyboard_portrait));
+		}
+		
+		_customKeyboard.setOnKeyboardActionListener(new KeyboardActionListner(_activity));
+	
+	
+	}
+	
 	
 	/**
 	 * adds a text field to the view
