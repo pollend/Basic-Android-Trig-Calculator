@@ -15,7 +15,14 @@ public class KeyboardActionListner implements OnKeyboardActionListener {
 
 	private Activity mTargetActivity;
 
-	
+	private static int TRIG = -2;
+	private static int CLIPBOARD = -100;
+	private static int LN = -70;
+	private static int e = -150;
+	private static int ENTER = -1;
+	private static int DELETE = -5;
+	private static int LOG = -800;
+
 	public KeyboardActionListner(Activity targetActivity) {
 		mTargetActivity = targetActivity;
 	}
@@ -74,22 +81,37 @@ public class KeyboardActionListner implements OnKeyboardActionListener {
 		
 
 		
-		if(primaryCode == -1)
+		if(primaryCode == ENTER)
 		{
 			leditText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_ENTER));
 		}
-		else if(primaryCode == -5)
+		else if(primaryCode == DELETE)
 		{
 			if(lstart>0)
 			ltext.delete(lstart-1,lstart);
 		}
-		else if(primaryCode == -100)
+		else if(primaryCode == CLIPBOARD)
 		{
 			ClipboardManager lcipboard = (ClipboardManager)this.mTargetActivity.getApplicationContext().getSystemService(this.mTargetActivity.getApplicationContext().CLIPBOARD_SERVICE);
 	
 			ltext.insert(lstart,lcipboard.getPrimaryClip().getItemAt(0).getText());
 		}
-		else if(primaryCode == -2)
+		else if(primaryCode == LN)
+		{
+			ltext.insert(lstart,"ln()");
+			leditText.setSelection(lstart + "ln()".length() - 1 );
+		}
+		else if(primaryCode == LOG)
+		{
+			ltext.insert(lstart,"log()");
+			leditText.setSelection(lstart + "log()".length() - 1 );
+		}
+		else if(primaryCode == e)
+		{
+			ltext.insert(lstart,"e()");
+			leditText.setSelection(lstart + "e()".length() - 1 );
+		}
+		else if(primaryCode == TRIG)
 		{
 			
 			String[] lstr = {"cos","sin","tan","cot","csc","sec","arccos","arcsin","arctan"};
@@ -139,7 +161,9 @@ public class KeyboardActionListner implements OnKeyboardActionListener {
 			lbuilder.show();
 		}
 		else
-		ltext.insert(lstart, Character.toString((char) primaryCode));
+		{
+			ltext.insert(lstart, Character.toString((char) primaryCode));
+		}
 		
 	}
 }

@@ -48,6 +48,9 @@ public class BackListView {
 		AddField();
 	}
 	
+	/**
+	 * adds a text field to the view
+	 */
 	private void AddField()
 	{
 		
@@ -127,7 +130,10 @@ public class BackListView {
 		}
 
 	}
-	
+	/**
+	 * changes the view to display the answer
+	 * @param layout
+	 */
 	private void ChangeToDisplay(RelativeLayout layout)
 	{
 		layout.removeAllViews();
@@ -150,12 +156,8 @@ public class BackListView {
 			loutput.setTextSize(20);
 			loutput.setPadding(0, 0, 17,0);
 			
-			ANTLRInputStream linput = new ANTLRInputStream(_textView.getText().toString());
-			CalculatorLexer llexer = new CalculatorLexer(linput);
-			CalculatorParser lparser = new CalculatorParser(new CommonTokenStream(llexer));
-			ProgContext ltree = lparser.prog();
-			loutput.setTextIsSelectable(true);
-			loutput.setText(_parseTree.visit(ltree).GetValueAsString());
+			//offloads calculations to a separate thread so ui thread isn't blocked
+			new CalculateThread(loutput, _parseTree, _textView.getText().toString()).run();
 
 		}
 		
@@ -170,12 +172,10 @@ public class BackListView {
 			lequation.setTextIsSelectable(true);
 			lequation.setText(_textView.getText());
 		}
-		/*TEST FOR EXQUATION AND OUTPUT INTERSECTION*/
+		
+		/*places the equation onto the next line when the output and equation can't be on the same line*/
 		lequation.measure(MeasureSpec.UNSPECIFIED,MeasureSpec.UNSPECIFIED);
 		loutput.measure(MeasureSpec.UNSPECIFIED,MeasureSpec.UNSPECIFIED);
-		int x  =lequation.getMeasuredWidth();
-		int y  =loutput.getMeasuredWidth();
-		int z  =_scrollingView.getMeasuredWidth();
 		if(lequation.getMeasuredWidth() + loutput.getMeasuredWidth() > (_scrollingView.getMeasuredWidth()-50))
 		{
 			RelativeLayout.LayoutParams lprams = (RelativeLayout.LayoutParams)loutput.getLayoutParams();

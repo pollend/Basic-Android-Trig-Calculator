@@ -27,6 +27,9 @@ public abstract class Function {
 		lfunction.add(new Sec());
 		lfunction.add(new Sin());
 		lfunction.add(new Tan());
+		lfunction.add(new e());
+		lfunction.add(new Log());
+		lfunction.add(new NaturalLog());
 		
 		return lfunction;
 		
