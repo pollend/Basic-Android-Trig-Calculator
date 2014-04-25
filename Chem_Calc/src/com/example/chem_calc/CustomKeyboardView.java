@@ -32,7 +32,7 @@ public class CustomKeyboardView extends KeyboardView {
 		if(v!= null)((InputMethodManager)this.getContext().getSystemService(this.getContext().INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
 		
 	}
-	public void Hidekeyboard(View v,Activity activity)
+	public void Hidekeyboard(Activity activity)
 	{
 		if (this.getVisibility() != this.GONE) {
 			this.setVisibility(this.GONE);

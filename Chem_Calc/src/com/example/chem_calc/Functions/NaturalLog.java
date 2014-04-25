@@ -12,7 +12,7 @@ public class NaturalLog extends Function{
 	@Override
 	public Value ProcessFunction(Value[] values) 
 	{
-		return new Value(Math.log1p(values[0].GetValueAsDouble()));
+		return new Value(Math.log(values[0].GetValueAsDouble()));
 	}
 
 }

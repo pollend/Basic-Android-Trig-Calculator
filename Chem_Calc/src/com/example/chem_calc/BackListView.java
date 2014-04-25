@@ -9,6 +9,7 @@ import com.example.chem_calc.antlr.CalculatorParser.ProgContext;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
@@ -49,9 +50,13 @@ public class BackListView extends Fragment{
 	public void UpdateKeyboard(int orientation)
 	{
 		
-		//set the keyboard
 		_customKeyboard = (CustomKeyboardView) _activity.findViewById(R.id.keyboard_view);
-		if(orientation == _activity.getResources().getConfiguration().ORIENTATION_LANDSCAPE)
+		_customKeyboard.Hidekeyboard(_activity);
+		if(_activity.getWindow().getCurrentFocus() != null)
+		_activity.getWindow().getCurrentFocus().clearFocus();
+		
+		//set the keyboard
+		if(orientation == Configuration.ORIENTATION_LANDSCAPE)
 		{
 			_customKeyboard.setKeyboard( new Keyboard(_activity.getApplicationContext(), R.layout.basic_math_keyboard_landscape));
 		}
@@ -62,7 +67,8 @@ public class BackListView extends Fragment{
 		
 		_customKeyboard.setOnKeyboardActionListener(new KeyboardActionListner(_activity));
 	
-	
+		
+		
 	}
 	
 	
@@ -127,7 +133,7 @@ public class BackListView extends Fragment{
 					if(hasFocus)
 						_customKeyboard.ShowkeyBoard( v,_activity);
 					else
-						_customKeyboard.Hidekeyboard( v,_activity);
+						_customKeyboard.Hidekeyboard(_activity);
 				}
 			});
 			lfield.setOnKeyListener(new View.OnKeyListener() {
